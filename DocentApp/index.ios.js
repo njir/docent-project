@@ -11,9 +11,29 @@ import {
   Text,
   View
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+
 
 export default class DocentApp extends Component {
+  state = {
+    isLoading: true,
+  };
+
+  componentDidMount() {
+    global.setTimeout(() => {
+      this.setState({isLoading: false});
+    }, 1000);
+  };
+
+  componentDidUpdate() {
+    if (!this.state.isLoading) {
+      SplashScreen.hide();
+    }
+  };
+
   render() {
+    if (this.state.isLoading) return null;
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
